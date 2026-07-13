@@ -119,6 +119,7 @@
         }
         .forgot-link:hover { text-decoration: underline; }
     </style>
+<base target="_blank">
 </head>
 <body>
     <div class="particles" id="particles"></div>
@@ -191,22 +192,29 @@
             }
         });
 
-        // Login handler
+        // Login handler - FIXED: Use auditSession to match dashboard.html
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const user = document.getElementById('username').value.trim();
             const pass = document.getElementById('password').value.trim();
             const alert = document.getElementById('errorAlert');
             const btn = document.querySelector('.btn-login');
-            
+
             btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> جاري التحقق...';
             btn.disabled = true;
 
             setTimeout(() => {
                 if(user === 'admin' && pass === 'admin123') {
-                    localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('currentUser', user);
-                    window.location.href = 'dashboard.html';
+                    // ✅ FIXED: Use 'auditSession' key to match dashboard.html
+                    const session = {
+                        username: user,
+                        name: 'أحمد الشمري',
+                        role: 'executive',
+                        loginTime: new Date().toISOString()
+                    };
+                    localStorage.setItem('auditSession', JSON.stringify(session));
+                    // ✅ FIXED: Use replace instead of href to prevent back-button issues
+                    window.location.replace('dashboard.html');
                 } else {
                     alert.classList.remove('d-none');
                     btn.innerHTML = '<i class="fas fa-arrow-right-to-bracket me-2"></i> تسجيل الدخول';
@@ -215,24 +223,5 @@
             }, 1000);
         });
     </script>
-  <script src="login-fix.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const loginForm = document.getElementById('loginForm');
-  if (loginForm) {
-    loginForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value;
-      
-      const result = await loginHandler.handleLogin(username, password);
-      
-      if (!result.success) {
-        alert(result.error);
-      }
-    });
-  }
-});
-</script>
 </body>
 </html>
