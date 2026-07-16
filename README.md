@@ -1,5 +1,5 @@
-# Internal Audit Platformفي 16 يوليو 2026  مشروعنا الرئيسي و الاساسي
-
+في 16 يوليو 2026  مشروعنا الثاني والرئيسي بعد معهد الفقه و التفقه الاسلامي 
+# Internal Audit Platform
 Professional Internal Audit, Risk Management, Governance and Compliance Platform.
 
 > A modern enterprise platform designed to support Internal Audit departments in planning, executing, documenting, and monitoring audit engagements in accordance with IIA Standards and international best practices.
